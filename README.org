@@ -1,0 +1,29 @@
+#+TITLE: use-package-transient
+* Intro
+  :PROPERTIES:
+  :CREATED:  [2024-10-04 Fri 09:21]
+  :END:
+
+  This package adds keyword to define transients inside ~use-package~ macro blocks.
+
+  Supported transients:
+  - ~:transient-suffix~ -> ~transient-define-suffix~
+  - ~:transient-prefix~ -> ~transient-define-prefix~
+
+* Usage
+  :PROPERTIES:
+  :CREATED:  [2024-10-04 Fri 09:23]
+  :END:
+
+  Transients can be added directly inside the use-package definition just as any other keyword.
+
+  You can define a single transient, or a list of transients.
+
+
+* Examples
+  :PROPERTIES:
+  :CREATED:  [2024-10-04 Fri 09:32]
+  :END:
+
+    #+begin_src emacs-lisp
+    #+end_src

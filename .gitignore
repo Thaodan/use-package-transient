@@ -1,0 +1,10 @@
+/config.mk
+*-autoloads.el
+*-pkg.el
+*.elc
+
+/docs/transient/
+
+# For ELPA:
+/*-autoloads.el
+/*-pkg.el
