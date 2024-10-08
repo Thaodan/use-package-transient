@@ -26,4 +26,26 @@
   :END:
 
     #+begin_src emacs-lisp
+    (use-package transient
+      :bind (("C-x l" . thao/transient-emacs-launcher))
+      :transient-prefix
+      (thao/transient-emacs-launcher ()
+       "Launch emacs package"
+       ["Launch emacs packaged"
+        ["Apps"
+         ("i" "Circe - IRC" circe)
+         ("I" "Circe - IRC (connect all)" circe-connect-all)
+         ("e" "Elfeed - RSS/Atom Newsreader" elfeed-summary)
+         ("g" "Gnus - Mail/Newsreader" gnus-other-frame)
+         ("m" "Mastodon.el - Mastodon" mastodon)
+         ("p" "proced" proced)]
+        ["Utils"
+         ("c" "calc - Quick calc" quick-calc)
+         ("C" "calendar" calendar)
+         ("T" "time - Display world time" world-clock)
+         ("j" "Journalctl" journalctl)]
+        ["Misc"
+         ("t" "Vterm" multi-vterm)
+         ("E" "elisp-index-search" elisp-index-search)
+         ("w" "woman - Man page viewer" man)]]))
     #+end_src
