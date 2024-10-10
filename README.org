@@ -4,48 +4,51 @@
   :CREATED:  [2024-10-04 Fri 09:21]
   :END:
 
-  This package adds keyword to define transients inside ~use-package~ macro blocks.
+  The package provides support to define transient commands in use-package
+  blocks as keywords. These are made available by default by requiring
+  ~use-package~.
 
-  Supported transients:
-  - ~:transient-suffix~ -> ~transient-define-suffix~
-  - ~:transient-prefix~ -> ~transient-define-prefix~
+  The keywords are:
+  - ~transient-prefix:~ -> ~transient-define-prefix~
+  - ~transient-suffix:~ -> ~transient-define-suffix~
 
 * Usage
   :PROPERTIES:
   :CREATED:  [2024-10-04 Fri 09:23]
   :END:
 
-  Transients can be added directly inside the use-package definition just as any other keyword.
+  Transient commands be added directly inside the use-package definition
+  just as any other keyword.
 
-  You can define a single transient, or a list of transients.
-
+  You can define a single transient, or a list of transients with type
+  under each keyword.
 
 * Examples
   :PROPERTIES:
   :CREATED:  [2024-10-04 Fri 09:32]
   :END:
 
-    #+begin_src emacs-lisp
-    (use-package transient
-      :bind (("C-x l" . thao/transient-emacs-launcher))
-      :transient-prefix
-      (thao/transient-emacs-launcher ()
-       "Launch emacs package"
-       ["Launch emacs packaged"
-        ["Apps"
-         ("i" "Circe - IRC" circe)
-         ("I" "Circe - IRC (connect all)" circe-connect-all)
-         ("e" "Elfeed - RSS/Atom Newsreader" elfeed-summary)
-         ("g" "Gnus - Mail/Newsreader" gnus-other-frame)
-         ("m" "Mastodon.el - Mastodon" mastodon)
-         ("p" "proced" proced)]
-        ["Utils"
-         ("c" "calc - Quick calc" quick-calc)
-         ("C" "calendar" calendar)
-         ("T" "time - Display world time" world-clock)
-         ("j" "Journalctl" journalctl)]
-        ["Misc"
-         ("t" "Vterm" multi-vterm)
-         ("E" "elisp-index-search" elisp-index-search)
-         ("w" "woman - Man page viewer" man)]]))
-    #+end_src
+  #+begin_src emacs-lisp
+  (use-package transient
+    :bind (("C-x l" . thao/transient-emacs-launcher))
+    :transient-prefix
+    (thao/transient-emacs-launcher ()
+                                   "Launch emacs package"
+                                   ["Launch emacs packaged"
+                                    ["Apps"
+                                     ("i" "Circe - IRC" circe)
+                                     ("I" "Circe - IRC (connect all)" circe-connect-all)
+                                     ("e" "Elfeed - RSS/Atom Newsreader" elfeed-summary)
+                                     ("g" "Gnus - Mail/Newsreader" gnus-other-frame)
+                                     ("m" "Mastodon.el - Mastodon" mastodon)
+                                     ("p" "proced" proced)]
+                                    ["Utils"
+                                     ("c" "calc - Quick calc" quick-calc)
+                                     ("C" "calendar" calendar)
+                                     ("T" "time - Display world time" world-clock)
+                                     ("j" "Journalctl" journalctl)]
+                                    ["Misc"
+                                     ("t" "Vterm" multi-vterm)
+                                     ("E" "elisp-index-search" elisp-index-search)
+                                     ("w" "woman - Man page viewer" man)]]))
+  #+end_src

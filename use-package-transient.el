@@ -1,4 +1,4 @@
-;;; use-package-transient.el --- Adds various :transient- keywords to use-package macro -*- lexical-binding:t -*-
+;;; use-package-transient.el --- transient- commands in use-package -*- lexical-binding:t -*-
 
 ;; Copyright (C) 2018 Toon Claes
 ;; Copyright (C) 2024 Björn Bidar
@@ -30,13 +30,14 @@
 
 ;;; Commentary:
 
-;; Provides support for various transient keywords, which are made available by
-;; default by requiring `use-package'.
-;; These keywords are:
-;; - transient-prefix:
-;; - transient-suffix:
+;; Provides support to define transient commands in use-package blocks
+;; as keywords.  These are made available by default by requiring
+;; `use-package'.  The keywords are:
+;; - transient-prefix: -> transient-define-prefix
+;; - transient-suffix: -> transient-define-suffix
 ;;
-;; Based upon use-package-hydra hence the reason for the partial copyright to Toon Claes.
+;; Based upon use-package-hydra hence the reason for the partial
+;; copyright to Toon Claes.
 
 ;;; Code:
 
@@ -49,11 +50,11 @@
 
 
 (defun use-package-transient--name (name)
-  "Build transient name for package NAME"
+  "Build transient name for package NAME."
   (cl-gentemp (concat "transient-" (symbol-name name))))
 
 (defun use-package-transient--normalize (name keyword args)
-  "Normalize the ARGS to be a list transients.
+  "Normalize the ARGS to be a list transients of type KEYWORD.
 It accepts a single transient, or a list of transients.  It is optional
 provide a name for the transient, if so there is a name generated
 from NAME."
