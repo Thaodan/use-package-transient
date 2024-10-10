@@ -75,7 +75,10 @@ from NAME."
        ;; list of transients
        ((listp (car args))
         (setq result*
-              (nconc result* (use-package-transient--normalize name keyword (car args)))
+              (nconc result* (use-package-transient--normalize name
+                                                               keyword
+                                                               (car
+                                                                args)))
               args (cdr args)))
        ;; Error!
        (t
@@ -85,32 +88,41 @@ from NAME."
           (symbol-name name) name )))))
     result*))
 
-(defalias 'use-package-normalize/:transient-prefix 'use-package-transient--normalize
+(defalias 'use-package-normalize/:transient-prefix
+  'use-package-transient--normalize
   "Normalize for the definition of one or more transient prefixes.")
 
-(defalias 'use-package-normalize/:transient-suffix 'use-package-transient--normalize
+(defalias 'use-package-normalize/:transient-suffix
+  'use-package-transient--normalize
   "Normalize for the definition of one or more transient suffixes.")
 
-(defun use-package-handler--transient-command (command name _keyword args rest state)
+(defun use-package-handler--transient-command
+    (command name _keyword args rest state)
   "Wrap command transient-handler for each transient command of type COMMAND.
 Generates a transient with NAME of type COMMAND for KEYWORD.
 NAME, ARGS, REST and STATE are prepared by the appropriate handler function."
   (use-package-concat
-   (mapcar #'(lambda (def) `(,(intern (concat "transient-define-" command)) ,@def))
+   (mapcar
+    #'(lambda (def)
+        `(,(intern (concat "transient-define-" command)) ,@def))
            args)
    (use-package-process-keywords name rest state)))
 
 ;;;###autoload
-(defun use-package-handler/:transient-prefix (name keyword args rest state)
+(defun use-package-handler/:transient-prefix
+    (name keyword args rest state)
   "Generate deftransient with NAME for `:transient-prefix' KEYWORD.
 ARGS, REST, and STATE are prepared by `use-package-normalize/:transient-prefix'."
-  (use-package-handler--transient-command "prefix" name keyword args rest state))
+  (use-package-handler--transient-command "prefix" name keyword args
+                                          rest state))
 
 ;;;###autoload
-(defun use-package-handler/:transient-suffix (name keyword args rest state)
+(defun use-package-handler/:transient-suffix
+    (name keyword args rest state)
   "Generate deftransient with NAME for `:transient' KEYWORD.
 ARGS, REST, and STATE are prepared by `use-package-normalize/:transient-suffix'."
-  (use-package-handler--transient-command "suffix" name keyword args rest state))
+  (use-package-handler--transient-command "suffix" name keyword args
+                                          rest state))
 
 (cl-pushnew :transient-suffix use-package-keywords)
 (cl-pushnew :transient-prefix use-package-keywords)
